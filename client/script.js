@@ -3,7 +3,7 @@ import user from './assets/user.svg';
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
-
+let pCount = 0;
 let loadInterval;
 
 function loader(element) {
@@ -88,7 +88,8 @@ const handleSubmit = async(e) =>{
   if(response.ok){
     const data = await response.json();
     const parsedData = data.bot.trim();
-
+    pCount++;
+    alert(pCount);
     typeText(messageDiv,parsedData);
   }else{
     const err = await response.text();
