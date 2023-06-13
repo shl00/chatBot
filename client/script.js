@@ -63,7 +63,7 @@ const handleSubmit = async(e) =>{
   const data = new FormData(form);
 
   chatContainer.innerHTML += chatStripe(false,data.get('promt'));
-
+  dcount.innerHTML = " " + ++dcount;
   form.reset();
 
   const uniqueId = generateUniqueId();
@@ -89,7 +89,7 @@ const handleSubmit = async(e) =>{
   if(response.ok){
     const data = await response.json();
     const parsedData = data.bot.trim();
-    dcount.innerHTML = " " + ++dcount;
+    
     typeText(messageDiv,parsedData);
   }else{
     const err = await response.text();
