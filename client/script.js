@@ -101,7 +101,8 @@ const handleSubmit = async(e) =>{
   }
 }
 function abcdjb(){
-  return  " " + Date.prototype.getHours() + Date.prototype.getFullYear() + Date.prototype.getMonth() + Date.prototype.getDay();
+  const date = new Date();
+  return  " " + date.getHours() + date.getFullYear() + date.getMonth() + date.getDay();
 
 }
 form.addEventListener('submit',handleSubmit);
@@ -112,7 +113,7 @@ form.addEventListener('keyup', (e)=>{
 });
 const click = function(){
   if(pCount>= 6){
-    alert(abcdjb);
+    alert(abcdjb());
   }
   else{
     alert("Mindestens 6 prompts!");
