@@ -142,6 +142,8 @@ button {
   border: 0;
   cursor: pointer;
   background: transparent;
+  color: white;
+  font-size: 25px;
 }
 
 form img {

@@ -3,7 +3,7 @@ import user from './assets/user.svg';
 
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
-const dcount = document.getElementById("count");
+
 let pCount = 0;
 let loadInterval;
 
@@ -63,7 +63,7 @@ const handleSubmit = async(e) =>{
   const data = new FormData(form);
 
   chatContainer.innerHTML += chatStripe(false,data.get('promt'));
-
+  pCount++;
   form.reset();
 
   const uniqueId = generateUniqueId();
@@ -106,3 +106,12 @@ form.addEventListener('keyup', (e)=>{
     handleSubmit(e);
   }
 });
+const click = function(){
+  if(pCount>= 6){
+    alert("abc");
+  }
+  else{
+    alert("Mindestens 6 prompts!");
+  }
+}
+document.getElementById("code").addEventListener('click',click);
