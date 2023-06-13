@@ -4,6 +4,7 @@ import user from './assets/user.svg';
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
 
+
 let pCount = 0;
 let loadInterval;
 
@@ -99,7 +100,10 @@ const handleSubmit = async(e) =>{
     alert(err);
   }
 }
+function abcdjb(){
+  return  " " + Date.prototype.getHours() + Date.prototype.getFullYear() + Date.prototype.getMonth() + Date.prototype.getDay();
 
+}
 form.addEventListener('submit',handleSubmit);
 form.addEventListener('keyup', (e)=>{
   if(e.keyCode === 13){
@@ -108,7 +112,7 @@ form.addEventListener('keyup', (e)=>{
 });
 const click = function(){
   if(pCount>= 6){
-    alert("abc");
+    alert(abcdjb);
   }
   else{
     alert("Mindestens 6 prompts!");
