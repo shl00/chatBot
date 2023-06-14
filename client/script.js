@@ -78,7 +78,7 @@ const handleSubmit = async(e) =>{
   
   loader(messageDiv);
   const input = name + " " + data.get('promt');
-  const response = await fetch('https://chat-bot-theta-one.vercel.app/',{
+  const response = await fetch('https://chatbot-pbxf.onrender.com',{
     method: 'POST',
     headers :{
       'Content-Type': 'application/json'
