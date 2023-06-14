@@ -1,12 +1,13 @@
 import bot from './assets/bot.svg';
 import user from './assets/user.svg';
-
 const form = document.querySelector('form');
 const chatContainer = document.querySelector('#chat_container');
-
-
+let questions=[];
+let awnsers =[];
 let pCount = 0;
 let loadInterval;
+var name = "";
+  name = window.prompt("Geben Sie Ihren Namen ein:");
 
 function loader(element) {
   element.textContent = '';
@@ -64,53 +65,82 @@ const handleSubmit = async(e) =>{
   const data = new FormData(form);
 
   chatContainer.innerHTML += chatStripe(false,data.get('promt'));
-  pCount++;
+  questions[pCount] = data.get('promt');
+  
   form.reset();
 
   const uniqueId = generateUniqueId();
   chatContainer.innerHTML += chatStripe(true," ",uniqueId);
-
+  
   chatContainer.scrollTop = chatContainer.scrollHeight;
 
   const messageDiv = document.getElementById(uniqueId);
-
+  
   loader(messageDiv);
-
-  const response = await fetch('https://chatbot-pbxf.onrender.com/',{
+  const input = name + " " + data.get('promt');
+  const response = await fetch('http://localhost:5000/',{
     method: 'POST',
     headers :{
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-      prompt: data.get('promt')
+      prompt:data.get('promt'),
+      na:name
     })
+    
   })
   clearInterval(loadInterval);
   messageDiv.innerHTML = '';
   if(response.ok){
     const data = await response.json();
     const parsedData = data.bot.trim();
-    dcount.innerHTML = " " + ++dcount;
+    awnsers[pCount] = parsedData;
     typeText(messageDiv,parsedData);
   }else{
     const err = await response.text();
-
+    
     messageDiv.innerHTML = "Something went wrong";
 
     alert(err);
   }
+  
+  pCount++;
 }
 function abcdjb(){
   const date = new Date();
   return  " " + date.getHours() + date.getFullYear() + date.getMonth() + date.getDay();
 
 }
-form.addEventListener('submit',handleSubmit);
-form.addEventListener('keyup', (e)=>{
-  if(e.keyCode === 13){
+function sub(e){
+  console.log(name);
+  if(name.trim() != ""){
     handleSubmit(e);
   }
+  else{
+    name =window.prompt("Geben Sie Ihren Namen ein:");
+  }
+}
+form.addEventListener('submit',(e)=>{
+  if(name.trim() != ""){
+      handleSubmit(e);
+  }
+  else{
+    name =window.prompt("Geben Sie Ihren Namen ein:");
+  }
 });
+form.addEventListener('keyup', (e)=>{
+  if(e.keyCode === 13){
+  if(name.trim() != ""){
+   
+      handleSubmit(e);
+    }
+    else{
+      name =window.prompt("Geben Sie Ihren Namen ein:");
+    }
+  }
+  
+});
+
 const click = function(){
   if(pCount>= 6){
     alert(abcdjb());
