@@ -51,7 +51,7 @@ app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
         name = req.body.na;
-        task = req.body.ta;
+        task = req.body.ta
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: `${prompt}`,
@@ -71,7 +71,7 @@ client.connect(function(err) {
       return console.error('could not connect to postgres', err);
     }});
     console.log("Verbunden");
-        let sql = "INSERT INTO Prompt VALUES('"+req.body.prompt+"','"+response.data.choices[0].text+"','"+name+"','" +task+"',);";
+        let sql = "INSERT INTO Prompt VALUES('"+req.body.prompt+"','"+response.data.choices[0].text+"','"+name+"','" +task+"');";
         console.log(sql);
         client.query(sql, function(err, result) {
             if(err) {
