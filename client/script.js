@@ -7,8 +7,18 @@ let awnsers =[];
 let pCount = 0;
 let loadInterval;
 var name = "";
+var task = "";
+const taskNames =["TaskMoralDilemma","TaskHealthChat","TaskSQL","TaskTPT"];
+function isTask(){
+  for(let i = 0; i< taskNames.length;i++){
+    if(task.trim() === taskNames[i]){
+      return true
+    }
+  }
+  return false;
+}
   name = window.prompt("Geben Sie Ihren Namen ein:");
-
+  task = window.prompt("Task: " + taskNames);
 function loader(element) {
   element.textContent = '';
 
@@ -78,7 +88,8 @@ const handleSubmit = async(e) =>{
   
   loader(messageDiv);
   const input = name + " " + data.get('promt');
-  const response = await fetch('https://chatbot-pbxf.onrender.com',{
+  //https://chatbot-pbxf.onrender.com
+  const response = await fetch('http://localhost:5000/',{
     method: 'POST',
     headers :{
       'Content-Type': 'application/json'
@@ -121,21 +132,31 @@ function sub(e){
   }
 }
 form.addEventListener('submit',(e)=>{
-  if(name.trim() != ""){
+  if(name.trim() != "" && isTask(task)){
       handleSubmit(e);
   }
   else{
+    if(name.trim() == ""){
     name =window.prompt("Geben Sie Ihren Namen ein:");
+    }
+    if(!isTask(task)){
+      task = window.prompt("Task: " + taskNames);
+    }
   }
 });
 form.addEventListener('keyup', (e)=>{
   if(e.keyCode === 13){
-  if(name.trim() != ""){
+  if(name.trim() != ""&& isTask(task)){
    
       handleSubmit(e);
     }
     else{
-      name =window.prompt("Geben Sie Ihren Namen ein:");
+      if(name.trim() == ""){
+        name =window.prompt("Geben Sie Ihren Namen ein:");
+        }
+        if(!isTask(task)){
+          task = window.prompt("Task: " + taskNames);
+        }
     }
   }
   
