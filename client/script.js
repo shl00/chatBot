@@ -19,7 +19,7 @@ function isTask(){
   return false;
 }
   name = window.prompt("Geben Sie Ihren Namen ein:");
-  task = window.prompt("Task: " + taskNames);
+  task = window.prompt("Task: " + "(" + taskNames[0]+","+taskNames[1] + " oder " + taskNames[2]+ ")");
 function loader(element) {
   element.textContent = '';
 
@@ -97,7 +97,8 @@ const handleSubmit = async(e) =>{
     },
     body: JSON.stringify({
       prompt:data.get('promt'),
-      na:name
+      na:name,
+      ta:task
     })
     
   })

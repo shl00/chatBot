@@ -10,6 +10,7 @@ const require = createRequire(import.meta.url);
 var pg = require('pg');
 var conString ="postgres://jjcvxmos:5D9o-SZWVWJRb5a8VPaWojzwHJygUjQz@tyke.db.elephantsql.com/jjcvxmos";
 var name = "";
+var task = "";
 dotenv.config();
 
 function getPrompt(string){
@@ -50,6 +51,7 @@ app.post('/', async (req, res) => {
     try {
         const prompt = req.body.prompt;
         name = req.body.na;
+        task = req.body.ta;
         const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: `${prompt}`,
@@ -69,7 +71,7 @@ client.connect(function(err) {
       return console.error('could not connect to postgres', err);
     }});
     console.log("Verbunden");
-        let sql = "INSERT INTO Prompt VALUES('"+req.body.prompt+"','"+response.data.choices[0].text+"','"+name+"');";
+        let sql = "INSERT INTO Prompt VALUES('"+req.body.prompt+"','"+response.data.choices[0].text+"','"+name+"','" +task+"',);";
         console.log(sql);
         client.query(sql, function(err, result) {
             if(err) {
