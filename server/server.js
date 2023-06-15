@@ -52,7 +52,7 @@ app.post('/', async (req, res) => {
         const prompt = req.body.prompt;
         name = req.body.na;
         task = req.body.ta
-        const response = await openai.createCompletion({
+        /*const response = await openai.createCompletion({
             model: "text-davinci-003",
             prompt: `${prompt}`,
             temperature: 1,
@@ -61,9 +61,17 @@ app.post('/', async (req, res) => {
             frequency_penalty: 0.5,
             presence_penalty: 0,
         
-        });
+        });*/
+        const completion = await openai.createChatCompletion({
+            model: 'gpt-3.5-turbo',
+            messages :[
+                {role:'user',
+                content:`${prompt}`},
+            ]
+        })
         res.status(200).send({
-            bot: response.data.choices[0].text
+            //bot: response.data.choices[0].text
+            bot:completion.data.choices[0].message
         })
         var client = new pg.Client(conString);
 client.connect(function(err) {
