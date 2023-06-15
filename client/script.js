@@ -9,6 +9,7 @@ let loadInterval;
 var name = "";
 var task = "";
 const taskNames =["TaskMoralDilemma","TaskHealthChat","TaskSQL","TaskTPT"];
+
 function isTask(){
   for(let i = 0; i< taskNames.length;i++){
     if(task.trim() === taskNames[i]){
@@ -132,21 +133,21 @@ function sub(e){
   }
 }
 form.addEventListener('submit',(e)=>{
-  if(name.trim() != "" && isTask(task)){
+  if(name.trim() != "" && taskNames.includes(task)){
       handleSubmit(e);
   }
   else{
     if(name.trim() == ""){
     name =window.prompt("Geben Sie Ihren Namen ein:");
     }
-    if(!isTask(task)){
+    if(!taskNames.includes(task)){
       task = window.prompt("Task: " + taskNames);
     }
   }
 });
 form.addEventListener('keyup', (e)=>{
   if(e.keyCode === 13){
-  if(name.trim() != ""&& isTask(task)){
+  if(name.trim() != ""&& taskNames.includes(task)){
    
       handleSubmit(e);
     }
@@ -154,7 +155,7 @@ form.addEventListener('keyup', (e)=>{
       if(name.trim() == ""){
         name =window.prompt("Geben Sie Ihren Namen ein:");
         }
-        if(!isTask(task)){
+        if(taskNames.includes(task)){
           task = window.prompt("Task: " + taskNames);
         }
     }
