@@ -106,7 +106,8 @@ const handleSubmit = async(e) =>{
   messageDiv.innerHTML = '';
   if(response.ok){
     const data = await response.json();
-    const parsedData = data.bot.trim();
+    console.log(data.bot)
+    const parsedData = data.bot.content.trim();
     awnsers[pCount] = parsedData;
     typeText(messageDiv,parsedData);
   }else{
