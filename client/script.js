@@ -90,7 +90,7 @@ const handleSubmit = async(e) =>{
   loader(messageDiv);
   const input = name + " " + data.get('promt');
   //https://chatbot-pbxf.onrender.com
-  const response = await fetch('http://localhost:5000/',{
+  const response = await fetch('https://chatbot-pbxf.onrender.com',{
     method: 'POST',
     headers :{
       'Content-Type': 'application/json'
